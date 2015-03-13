@@ -1,0 +1,105 @@
+body {
+  width: 800px;
+  margin:0 auto;
+  font-size:large;
+  font-family: "Helvetica"
+}
+
+table tr td {
+  width: 50px;
+  padding:5px;
+  text-align: center;
+  vertical-align: top;
+}
+
+
+td {
+  border: 1px solid grey;
+  cursor: pointer;
+}
+
+.story {
+  background-color: #19D;
+}
+
+.firstColumn {
+  width: 140px;
+  text-align:center;
+}
+
+.member {
+  padding: 2px;
+  position:relative;
+  border: 1px;
+}
+
+.deleteButton {
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  padding: 0 4px 0 4px;
+  margin: 0;
+  height: 100%;
+}
+
+.deleteButton:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+
+.consumptionRow {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.progressName {
+  width: 100px;
+  float:left;
+}
+
+.progressPercent {
+  float:left;
+  width: 40px;
+}
+
+.progressBarWrapper {
+  width: 660px;
+  float:left;
+}
+
+.progressBar {
+  border: 1px dashed grey;
+  height: 100%;
+}
+
+.modalWrapper {
+  width: 150px;
+  height: 75px;
+  padding: 15px;
+  border: 1px dashed grey;
+  z-index: 10;
+  position: absolute;
+  background: white;
+
+}
+
+.colorPreview {
+  width: 17px;
+  height: 17px;
+  float:right;
+  border: 1px solid grey;
+}
+.clear {
+  clear: both;
+}
+
+.storyNameWidget {
+  position:relative;
+}
+
+.memberNameWidget {
+  position:relative;
+}
