@@ -2,22 +2,34 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
+
     pkg: grunt.file.readJSON('package.json'),
-    uglify: {
+
+    react: {
+      combined_file_output: {
+        files: {
+          'build/<%= pkg.name %>.js': [
+            'src/*.jsx'
+          ]
+        }
+      }
+    },
+
+    browserify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        transform:  [ require('grunt-react').browserify ]
       },
-      build: {
-        src: 'src/<%= pkg.name %>.js',
+      app: {
+        src: 'build/combined.js',
         dest: 'build/<%= pkg.name %>.min.js'
       }
     }
   });
 
-  // Load the plugin that provides the "uglify" task.
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-react');
+  grunt.loadNpmTasks('grunt-browserify');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('default', ['browserify']);
 
 };
