@@ -23,11 +23,22 @@ module.exports = function(grunt) {
         src: 'build/combined.js',
         dest: 'build/<%= pkg.name %>.min.js'
       }
+    },
+
+    watch: {
+      scripts: {
+        files: ['src/*.jsx'],
+        tasks: ['react'],
+        options: {
+          spawn: false
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-react');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
   grunt.registerTask('default', ['browserify']);
