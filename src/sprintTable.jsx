@@ -37,7 +37,6 @@ var SprintTable = React.createClass({
         initState.sprintDays = data.sprintDays;
       }
     }
-    console.log(initState)
     return initState;
   },
 
@@ -47,7 +46,6 @@ var SprintTable = React.createClass({
 
   getStateFromLocalStorage: function() {
     var data = JSON.parse(localStorage.getItem("sprintPlanner"));
-    console.log(data);
     return data;
   },
 
@@ -59,6 +57,17 @@ var SprintTable = React.createClass({
 
   drag: function(member, event) {
     event.dataTransfer.setData("member", JSON.stringify(member));
+  },
+
+  saveAssignees: function(index, storyId, assignees) {
+    var self = this;
+    var newAssignees = [];
+    assignees.forEach(function(assigneeId) {
+      newAssignees.push(self.getMember(assigneeId))
+    });
+
+    this.state.assigneeMap[storyId][index] = newAssignees;
+    this.setState({assigneeMap: this.state.assigneeMap});
   },
 
   addAssignee: function(storyId, index, newMember) {
@@ -239,6 +248,8 @@ var SprintTable = React.createClass({
           addAssignee={this.addAssignee}
           removeAssignee={this.removeAssignee}
           getMember={this.getMember}
+          members={this.state.members}
+          saveAssignees={this.saveAssignees}
         />
         <button onClick={this.addStory}>add Story</button>
 

@@ -5,21 +5,16 @@ body {
   font-family: "Helvetica"
 }
 
-table tr td {
+td {
   width: 50px;
-  padding: 5px;
   text-align: center;
   vertical-align: top;
 }
 
-
 td {
+  padding: 5px;
   border: 1px solid grey;
   cursor: pointer;
-}
-
-.story {
-  background-color: #19D;
 }
 
 .firstColumn {
@@ -106,6 +101,17 @@ td {
   position:relative;
 }
 
+
+.story {
+  background-color: #DDD;
+}
+
+
 .memberNameWidget {
   position:relative;
+}
+
+select {
+  border: none;
+  width: 100%;
 }

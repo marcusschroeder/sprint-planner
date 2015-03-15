@@ -14,7 +14,8 @@ var AssigneeWidget = React.createClass({
     removeAssignee: React.PropTypes.func.isRequired
   },
 
-  deleteClick: function() {
+  deleteClick: function(event) {
+    event.stopPropagation();
     this.props.removeAssignee(this.props.storyId, this.props.index, this.props.member);
   },
 

@@ -8,7 +8,8 @@ var StoryTable = React.createClass({
     removeAssignee: React.PropTypes.func.isRequired,
     getMember: React.PropTypes.func.isRequired,
     deleteStory: React.PropTypes.func.isRequired,
-    saveStory: React.PropTypes.func.isRequired
+    saveStory: React.PropTypes.func.isRequired,
+    saveAssignees: React.PropTypes.func.isRequired
   },
 
   render: function() {
@@ -33,7 +34,9 @@ var StoryTable = React.createClass({
             addAssignee={self.props.addAssignee}
             assignees={assignees}
             removeAssignee={self.props.removeAssignee}
+            saveAssignees={self.props.saveAssignees}
             getMember={self.props.getMember}
+            members={self.props.members}
           />
         )
 
@@ -45,7 +48,7 @@ var StoryTable = React.createClass({
         <tr className="border-thin">
           <td className="story firstColumn">{storyNameWidget}</td>
         {storyCells}
-          <td>{rowTotal}</td>
+          <td className="story" >{rowTotal}</td>
         </tr>);
     });
 

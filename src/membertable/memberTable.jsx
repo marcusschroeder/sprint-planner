@@ -37,7 +37,7 @@ var MemberTable = React.createClass({
               editMember={self.props.editMember}/>
           </td>
           {days}
-          <td>
+          <td style={style}>
           {rowTotal}
           </td>
         </tr>

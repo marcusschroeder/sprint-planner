@@ -30,8 +30,10 @@ var MemberNameWidget = React.createClass({
 
   render: function() {
 
+    var style = {backgroundColor:this.props.member.color};
+
     return (
-      <div className="memberNameWidget" draggable="true" onDragStart={this.drag} onClick={this.editClick}>
+      <div className="memberNameWidget" draggable="true" onDragStart={this.drag} onClick={this.editClick} style={style}>
         {this.props.member.name}
         <button className="deleteButton" onClick={this.deleteClick}>x</button>
       </div>
