@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       combined_file_output: {
         files: {
           'build/<%= pkg.name %>.js': [
-            'src/*.jsx'
+            'src/**/*.jsx'
           ]
         }
       }
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['src/*.jsx'],
+        files: ['src/**/*.jsx'],
         tasks: ['react'],
         options: {
           spawn: false
