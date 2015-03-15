@@ -84,8 +84,12 @@ td {
   z-index: 10;
   position: absolute;
   background: white;
-
 }
+
+.assignees {
+  height: auto;
+}
+
 
 .colorPreview {
   width: 17px;

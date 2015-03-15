@@ -44,8 +44,8 @@ var SelectAssigneeWidget = React.createClass({
     });
 
     return (
-      <div  className="modalWrapper" style={positionStyle}>
-        <select ref="selectBox" multiple={true} onChange={this.change}>
+      <div  className="modalWrapper assignees" style={positionStyle}>
+        <select ref="selectBox" multiple={true} onChange={this.change} size={this.props.members.length}>
           {options}
         </select>
         <div>
