@@ -23,6 +23,11 @@ var StoryNameWidget = React.createClass({
   save: function(newName) {
     var story = this.props.story;
     story.name = newName;
+
+    if(story.hasOwnProperty("editMode")) {
+      delete story.editMode;
+    }
+
     this.props.saveStory(story);
     this.toggle();
   },
@@ -44,7 +49,7 @@ var StoryNameWidget = React.createClass({
   render: function() {
     var content;
     var story = this.props.story;
-    if(this.state.editMode) {
+    if(this.state.editMode || (story.hasOwnProperty("editMode") && story.editMode)) {
       content = <input type="text" maxLength="10" defaultValue={story.name} onKeyDown={this.keyDown} onBlur={this.toggle} autoFocus />
     } else {
       content = <div className="storyNameWidget" onClick={this.toggle}>{story.name}<button className="deleteButton" onClick={this.deleteClick}>x</button></div>;

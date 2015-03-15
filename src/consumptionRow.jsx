@@ -14,10 +14,10 @@ var ConsumptionRow = React.createClass({
     return (
       <div className="consumptionRow">
         <div className="progressName">{this.props.name}</div>
+        <div className="progressPercent">{this.props.progress}%</div>
         <div className="progressBarWrapper">
           <div className="progressBar" style={progressStyle}>&nbsp;</div>
         </div>
-        <div className="progressPercent">{this.props.progress}%</div>
         <div className="clear"></div>
       </div>
     )

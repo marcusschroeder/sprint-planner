@@ -28,10 +28,13 @@ var MemberTable = React.createClass({
         return <MemberDayCell changePresence={self.props.changePresence} member={member} index={index} value={value} />;
       });
 
+      var style = {backgroundColor: member.color};
+
       return (
         <tr>
-          <td className="firstColumn">
-            <MemberNameWidget member={member} deleteMember={self.props.deleteMember} drag={self.props.drag} editMember={self.props.editMember} />
+          <td className="firstColumn" style={style}>
+            <MemberNameWidget member={member} deleteMember={self.props.deleteMember} drag={self.props.drag}
+              editMember={self.props.editMember}/>
           </td>
           {days}
           <td>

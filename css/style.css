@@ -7,7 +7,7 @@ body {
 
 table tr td {
   width: 50px;
-  padding:5px;
+  padding: 5px;
   text-align: center;
   vertical-align: top;
 }
@@ -24,11 +24,10 @@ td {
 
 .firstColumn {
   width: 140px;
-  text-align:center;
 }
 
 .member {
-  padding: 2px;
+  padding: 0px;
   position:relative;
   border: 1px;
 }
@@ -56,18 +55,25 @@ td {
 }
 
 .progressName {
-  width: 100px;
+  width: 680px;
+  margin-left: 3px;
   float:left;
+  height: 24px;
+  padding-top: 4px;
 }
 
 .progressPercent {
   float:left;
   width: 40px;
+  height: 24px;
+  padding-top: 4px;
 }
 
 .progressBarWrapper {
-  width: 660px;
-  float:left;
+  width: 732px;
+  position: absolute;
+  z-index: -1;
+  height: 24px;
 }
 
 .progressBar {
