@@ -4,12 +4,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
+    frontend_dir: 'frontend/src/**/*.jsx',
 
     react: {
       combined_file_output: {
         files: {
-          'build/<%= pkg.name %>.js': [
-            'src/**/*.jsx'
+          'public/js/<%= pkg.name %>.js': [
+            '<%= frontend_dir %>'
           ]
         }
       }
@@ -27,7 +28,7 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['src/**/*.jsx'],
+        files: ['<%= frontend_dir %>'],
         tasks: ['react'],
         options: {
           spawn: false
