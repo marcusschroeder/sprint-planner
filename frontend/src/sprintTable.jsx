@@ -60,11 +60,10 @@ var SprintTable = React.createClass({
   },
 
   saveAssignees: function(index, storyId, assignees) {
-    var self = this;
-    var newAssignees = [];
-    assignees.forEach(function(assigneeId) {
-      newAssignees.push(self.getMember(assigneeId))
-    });
+    
+    var newAssignees = assignees.map(function(assigneeId) {
+      return this.getMember(assigneeId);
+    }, this);
 
     this.state.assigneeMap[storyId][index] = newAssignees;
     this.setState({assigneeMap: this.state.assigneeMap});
