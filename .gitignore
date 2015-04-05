@@ -6,8 +6,6 @@ build/
 
 node_modules/
 
-bower_components/
+public/js
 
-public/js/Sprint-Planner.js
-
-public/js/libs/
+bower_components
