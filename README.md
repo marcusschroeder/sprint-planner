@@ -7,7 +7,14 @@ A small tool to plan your sprint more efficiently.
 - Add stories and assign your programmers by clicking a cell or by dragging a programmer (names) to a cell in the story table.
 
 # Get started
-1. npm install
-2. grunt react
-3. node server.js
-3. browse 127.0.0.1:3000/index.html
+Follow these steps to get the tool running on your local machine:
+
+    npm install
+    grunt react
+    node server.js
+
+Then browse 127.0.0.1:3000/index.html
+
+If you want to see code changes do:
+ 
+    grunt watch
