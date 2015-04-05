@@ -1,10 +1,24 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
-  // Project configuration.
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
     frontend_dir: 'frontend/src/**/*.jsx',
+
+    bower: {
+      dev: {
+        dest: 'public/js/libs',
+        options: {
+          packageSpecific: {
+            'react': {
+              files: [
+                'react.min.js'
+              ]
+            }
+          }
+        }
+      }
+    },
 
     react: {
       combined_file_output: {
@@ -13,16 +27,6 @@ module.exports = function(grunt) {
             '<%= frontend_dir %>'
           ]
         }
-      }
-    },
-
-    browserify: {
-      options: {
-        transform:  [ require('grunt-react').browserify ]
-      },
-      app: {
-        src: 'build/combined.js',
-        dest: 'build/<%= pkg.name %>.min.js'
       }
     },
 
@@ -38,10 +42,9 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-react');
-  grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-bower');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  // Default task(s).
-  grunt.registerTask('default', ['browserify']);
+  grunt.registerTask('init', ['bower', 'react']);
 
 };
