@@ -40,18 +40,17 @@ var StoryDayCell = React.createClass({
   },
 
   render: function() {
-    var self = this;
     var assignees = this.props.assignees.map(function(assignee) {
 
-      var member = self.props.getMember(assignee.id);
+      var member = this.props.getMember(assignee.id);
       return (
         <AssigneeWidget
           member={member}
-          storyId={self.props.storyId}
-          index={self.props.index}
-          removeAssignee={self.props.removeAssignee} />
+          storyId={this.props.storyId}
+          index={this.props.index}
+          removeAssignee={this.props.removeAssignee} />
       );
-    });
+    }, this);
 
     return (
       <td onDrop={this.drop} onDragOver={this.allowDrop} onClick={this.showSelectBox}>

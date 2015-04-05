@@ -12,37 +12,36 @@ var StoryTable = React.createClass({
     saveAssignees: React.PropTypes.func.isRequired
   },
 
-  render: function() {
-    var self = this;
+  render: function () {
 
-    var sprintDays = self.props.sprintDays.map(function(day){
+    var sprintDays = this.props.sprintDays.map(function (day) {
       return (<th>{day}</th>)
     });
 
-    var storyList = self.props.stories.map(function(story){
+    var storyList = this.props.stories.map(function (story) {
       var rowTotal = 0;
-      var storyCells = self.props.sprintDays.map(function(value, index){
+      var storyCells = this.props.sprintDays.map(function (value, index) {
         var assignees = [];
-        if(typeof self.props.assigneeMap[story.id] !== "undefined") {
-          var assignees = self.props.assigneeMap[story.id][index];
+        if (typeof this.props.assigneeMap[story.id] !== "undefined") {
+          var assignees = this.props.assigneeMap[story.id][index];
           rowTotal += assignees.length;
         }
         return (
           <StoryDayCell
             index={index}
             storyId={story.id}
-            addAssignee={self.props.addAssignee}
+            addAssignee={this.props.addAssignee}
             assignees={assignees}
-            removeAssignee={self.props.removeAssignee}
-            saveAssignees={self.props.saveAssignees}
-            getMember={self.props.getMember}
-            members={self.props.members}
+            removeAssignee={this.props.removeAssignee}
+            saveAssignees={this.props.saveAssignees}
+            getMember={this.props.getMember}
+            members={this.props.members}
           />
         )
 
-      });
+      }, this);
 
-      var storyNameWidget = <StoryNameWidget story={story} saveStory={self.props.saveStory} deleteStory={self.props.deleteStory} />;
+      var storyNameWidget = <StoryNameWidget story={story} saveStory={this.props.saveStory} deleteStory={this.props.deleteStory} />;
 
       return (
         <tr className="border-thin">
@@ -50,7 +49,7 @@ var StoryTable = React.createClass({
         {storyCells}
           <td className="story" >{rowTotal}</td>
         </tr>);
-    });
+    }, this);
 
     return (
       <table>

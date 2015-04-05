@@ -1,19 +1,19 @@
 var SprintTable = React.createClass({
 
 
-  changePresence: function(memberId, dayIndex) {
+  changePresence: function (memberId, dayIndex) {
     var currentVal = this.state.memberDays[memberId][dayIndex];
 
     currentVal -= 0.5;
 
-    if(currentVal < 0) {
+    if (currentVal < 0) {
       currentVal = 1
     }
     this.state.memberDays[memberId][dayIndex] = currentVal;
     this.setState({memberDays: this.state.memberDays});
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     var data = this.getStateFromLocalStorage();
     var initState = {members: [], stories: [], sprintDays: sprintDays, memberDays: {}, assigneeMap: {}};
     if (data != null) {
@@ -40,28 +40,28 @@ var SprintTable = React.createClass({
     return initState;
   },
 
-  componentDidUpdate: function() {
+  componentDidUpdate: function () {
     this.saveStateToLocalStorage();
   },
 
-  getStateFromLocalStorage: function() {
+  getStateFromLocalStorage: function () {
     var data = JSON.parse(localStorage.getItem("sprintPlanner"));
     return data;
   },
 
-  saveStateToLocalStorage: function() {
+  saveStateToLocalStorage: function () {
     console.log("Saving to localStorage: sprintPlanner", this.state);
     var newState = JSON.stringify(this.state);
     localStorage.setItem("sprintPlanner", newState);
   },
 
-  drag: function(member, event) {
+  drag: function (member, event) {
     event.dataTransfer.setData("member", JSON.stringify(member));
   },
 
-  saveAssignees: function(index, storyId, assignees) {
-    
-    var newAssignees = assignees.map(function(assigneeId) {
+  saveAssignees: function (index, storyId, assignees) {
+
+    var newAssignees = assignees.map(function (assigneeId) {
       return this.getMember(assigneeId);
     }, this);
 
@@ -69,27 +69,27 @@ var SprintTable = React.createClass({
     this.setState({assigneeMap: this.state.assigneeMap});
   },
 
-  addAssignee: function(storyId, index, newMember) {
+  addAssignee: function (storyId, index, newMember) {
     var contains = false;
 
-    this.state.assigneeMap[storyId][index].forEach(function(member) {
-      if(member.id === newMember.id) {
+    this.state.assigneeMap[storyId][index].forEach(function (member) {
+      if (member.id === newMember.id) {
         contains = true;
       }
     });
 
 
-    if(!contains) {
+    if (!contains) {
       this.state.assigneeMap[storyId][index].push(newMember);
       this.setState({assigneeMap: this.state.assigneeMap})
     }
   },
 
-  removeAssignee: function(storyId, index, deleteMember) {
+  removeAssignee: function (storyId, index, deleteMember) {
     var newAssigness = [];
 
-    this.state.assigneeMap[storyId][index].forEach(function(member) {
-      if(member.id != deleteMember.id) {
+    this.state.assigneeMap[storyId][index].forEach(function (member) {
+      if (member.id != deleteMember.id) {
         newAssigness.push(member)
       }
     });
@@ -97,70 +97,65 @@ var SprintTable = React.createClass({
     this.setState({assigneeMap: this.state.assigneeMap})
   },
 
-  openAddMemberDialog: function(event) {
+  openAddMemberDialog: function (event) {
     React.render(<MemberModal clientX={event.clientX} clientY={event.clientY} saveMember={this.addMember} />, document.getElementById('modal'))
   },
 
-  addMember: function(member) {
-    var self = this;
-
+  addMember: function (member) {
     member.id = "m" + Math.round(Math.random() * 100000)
     this.state.members.push(member);
 
-    // add for each sprintday to memberDays
     this.state.memberDays[member.id] = [];
-    this.state.sprintDays.forEach(function() {
-      self.state.memberDays[member.id].push(1);
-    });
+    this.state.sprintDays.forEach(function () {
+      this.state.memberDays[member.id].push(1);
+    }, this);
+
     this.setState({memberDays: this.state.memberDays, members: this.state.members})
   },
 
-  editMember: function(member) {
+  editMember: function (member) {
     var memberIndex = this.getMemberIndex(member.id);
     this.state.members[memberIndex] = member;
     this.setState({members: this.state.members})
   },
 
-  deleteMember: function(member) {
-    var self = this;
-
-    var index = this.getMemberIndex(member.id);
+  deleteMember: function (member) {
 
     var members = [];
     var assigneeMap = {};
 
-    self.state.members.forEach(function(m) {
+    this.state.members.forEach(function (m) {
       if (m.id != member.id) {
         members.push(m);
 
-        Object.keys(self.state.assigneeMap).forEach(function(storyId) {
-          var assigneeRow = self.state.assigneeMap[storyId];
+        Object.keys(this.state.assigneeMap).forEach(function (storyId) {
+          var assigneeRow = this.state.assigneeMap[storyId];
 
           assigneeMap[storyId] = [];
-          assigneeRow.forEach(function(assigneeColumn) {
+          assigneeRow.forEach(function (assigneeColumn) {
 
             var newAssignees = [];
 
-            assigneeColumn.forEach(function(assignee) {
-              if(assignee.id != member.id) {
+            assigneeColumn.forEach(function (assignee) {
+              if (assignee.id != member.id) {
                 newAssignees.push(assignee);
               }
             });
 
             assigneeMap[storyId].push(newAssignees);
           })
-        })
+        }, this)
       }
-    });
+    }, this);
 
     delete this.state.memberDays[member.id]
-    this.setState({members: members, memberDays: self.state.memberDays, assigneeMap: assigneeMap })
+    this.setState({members: members, memberDays: this.state.memberDays, assigneeMap: assigneeMap})
   },
 
-  getMemberIndex: function(memberId) {
+  getMemberIndex: function (memberId) {
     var i = -1;
-    this.state.members.some(function(member, index) {
-      if(member.id === memberId) {
+    this.state.members.some(function (member, index) {
+      if (member.id === memberId) {
         i = index;
         return true;
       }
@@ -168,36 +163,32 @@ var SprintTable = React.createClass({
     return i;
   },
 
-  getMember: function(memberId) {
+  getMember: function (memberId) {
     return this.state.members[this.getMemberIndex(memberId)];
   },
 
-  addStory: function() {
-    var self = this;
-    var id = "s" + Math.round( Math.random() * 100000);
+  addStory: function () {
+    var id = "s" + Math.round(Math.random() * 100000);
     var newStory = {id: id, name: "NAME", editMode: true}
 
     this.state.stories.push(newStory);
     this.state.assigneeMap[id] = [];
-    this.state.sprintDays.forEach(function() {
-      self.state.assigneeMap[id].push([]);
-    });
+    this.state.sprintDays.forEach(function () {
+      this.state.assigneeMap[id].push([]);
+    }, this);
 
     this.setState({stories: this.state.stories, assigneeMap: this.state.assigneeMap});
   },
 
-  saveStory: function(story) {
+  saveStory: function (story) {
     var index = this.getStoryIndex(story.id);
     this.state.stories[index] = story;
     this.setState({stories: this.state.stories})
   },
 
-  deleteStory: function(story) {
-    var self = this;
-    var index = this.getStoryIndex(story.id);
-
+  deleteStory: function (story) {
     var stories = [];
-    self.state.stories.forEach(function(s) {
+    this.state.stories.forEach(function (s) {
       if (s.id != story.id) {
         stories.push(s);
       }
@@ -209,10 +200,10 @@ var SprintTable = React.createClass({
     this.setState({stories: stories, assigneeMap: this.state.assigneeMap});
   },
 
-  getStoryIndex: function(storyId) {
+  getStoryIndex: function (storyId) {
     var i = -1;
-    this.state.stories.some(function(story, index) {
-      if(story.id === storyId) {
+    this.state.stories.some(function (story, index) {
+      if (story.id === storyId) {
         i = index;
         return true;
       }
@@ -220,7 +211,7 @@ var SprintTable = React.createClass({
     return i;
   },
 
-  render: function() {
+  render: function () {
     return (
       <div>
 
