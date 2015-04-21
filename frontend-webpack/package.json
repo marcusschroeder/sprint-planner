@@ -1,0 +1,24 @@
+{
+  "name": "frontend-webpack",
+  "version": "1.0.0",
+  "description": "Sprint Planer App frontend build with Webpack",
+  "main": "index.html",
+  "scripts": {
+
+    "start": "webpack-dev-server --hot --progress --colors",
+    "build": "webpack --progress --colors",
+
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mickey Mouse, Peg-leg Pete",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^5.1.11",
+    "babel-loader": "^5.0.0",
+    "react": "^0.13.2",
+    "react-hot-loader": "^1.2.5",
+    "react-router": "^0.13.2",
+    "webpack": "^1.8.8",
+    "webpack-dev-server": "^1.8.2"
+  }
+}
