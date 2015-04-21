@@ -10,11 +10,9 @@ The initial setup is currently inspired by this [blog-post](http://jmfurlott.com
 3.  `mkdir js css && touch index.html webpack.config.js` create base files and folders for setup
 
 ## Run the Webpack
- TODO:
-  - [ ] dev server
-  - [ ] build for production
 
-
+ - to build the project run `npm run build`
+ - to start devserver do `npm start`
 
 ## GENERAL TODOS:
   - Less or SASS processing
