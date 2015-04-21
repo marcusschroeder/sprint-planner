@@ -4,7 +4,7 @@ var SprintTable = React.createClass({
   changePresence: function (memberId, dayIndex) {
     var currentVal = this.state.memberDays[memberId][dayIndex];
 
-    currentVal -= 0.5;
+    currentVal -= .5;
 
     if (currentVal < 0) {
       currentVal = 1
@@ -13,31 +13,18 @@ var SprintTable = React.createClass({
     this.setState({memberDays: this.state.memberDays});
   },
 
-  getInitialState: function () {
+  populateInitState: function (initState) {
     var data = this.getStateFromLocalStorage();
-    var initState = {members: [], stories: [], sprintDays: sprintDays, memberDays: {}, assigneeMap: {}};
-    if (data != null) {
-      if (data.hasOwnProperty("stories")) {
-        initState.stories = data.stories;
-      }
 
-      if (data.hasOwnProperty("members")) {
-        initState.members = data.members;
-      }
-
-      if (data.hasOwnProperty("memberDays")) {
-        initState.memberDays = data.memberDays;
-      }
-
-      if (data.hasOwnProperty("assigneeMap")) {
-        initState.assigneeMap = data.assigneeMap;
-      }
-
-      if (data.hasOwnProperty("sprintDays")) {
-        initState.sprintDays = data.sprintDays;
-      }
+    if(null !== data) {
+      Object.keys(initState).map((key) => initState[key] = data[key] ,this);
     }
     return initState;
+  },
+  getInitialState: function () {
+    var initState = {members: [], stories: [], sprintDays: sprintDays, memberDays: {}, assigneeMap: {}};
+
+    return this.populateInitState(initState);
   },
 
   componentDidUpdate: function () {
