@@ -119,3 +119,9 @@ select {
   border: none;
   width: 100%;
 }
+
+.totalDays {
+  text-align: right;
+  padding-right: 90px;
+  font-style: italic;
+}
