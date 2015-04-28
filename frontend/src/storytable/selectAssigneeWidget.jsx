@@ -29,10 +29,9 @@ var SelectAssigneeWidget = React.createClass({
   },
 
   render: function() {
-    var self = this;
     var positionStyle = {top: this.props.clientY, left: this.props.clientX}
     var options = this.props.members.map(function (member) {
-      var selected = self.props.assignees.some(function(assignee) {
+      var selected = this.props.assignees.some(function(assignee) {
         return member.id == assignee.id;
       });
 
@@ -41,7 +40,7 @@ var SelectAssigneeWidget = React.createClass({
       } else {
         return <option value={member.id} >{member.name}</option>
       }
-    });
+    }, this);
 
     return (
       <div  className="modalWrapper assignees" style={positionStyle}>

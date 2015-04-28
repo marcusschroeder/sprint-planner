@@ -1,0 +1,6 @@
+{
+  "name": "sprint-planner",
+  "dependencies": {
+    "react": "~0.13.1"
+  }
+}
