@@ -37,6 +37,7 @@ The initial setup is currently inspired by this [blog-post](http://jmfurlott.com
 - https://github.com/christianalfoni/react-webpack-cookbook/wiki
 - https://github.com/petehunt/webpack-howto
 - [Modular Javascript, Addy Osmani](http://addyosmani.com/writing-modular-js/)
+- http://gaearon.github.io/react-hot-loader/
 
 
 ## Notes
