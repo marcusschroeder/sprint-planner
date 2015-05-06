@@ -1,4 +1,6 @@
-var StoryTable = React.createClass({
+import React from 'react';
+
+let StoryTable = React.createClass({
 
   propTypes: {
     sprintDays: React.PropTypes.array.isRequired,
@@ -66,3 +68,5 @@ var StoryTable = React.createClass({
     );
   }
 })
+
+export default StoryTable;

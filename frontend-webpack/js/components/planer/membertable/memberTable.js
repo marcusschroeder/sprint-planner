@@ -1,6 +1,6 @@
-/*
- */
-var MemberTable = React.createClass({
+import React from "react";
+
+let MemberTable = React.createClass({
 
   propTypes: {
     sprintDays: React.PropTypes.array.isRequired,
@@ -57,3 +57,5 @@ var MemberTable = React.createClass({
     )
   }
 })
+
+export default MemberTable;

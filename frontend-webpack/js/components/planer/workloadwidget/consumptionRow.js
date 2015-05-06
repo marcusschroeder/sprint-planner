@@ -1,7 +1,9 @@
+import React from 'react';
+
 /*
  Renders a progress bar for one member.
  */
-var ConsumptionRow = React.createClass({
+let ConsumptionRow = React.createClass({
 
   propTypes: {
     color: React.PropTypes.string.isRequired,
@@ -23,3 +25,5 @@ var ConsumptionRow = React.createClass({
     )
   }
 })
+
+export default ConsumptionRow;

@@ -1,4 +1,11 @@
-var SprintTable = React.createClass({
+import React from 'react';
+
+import MemberTable from './memberTable/memberTable.js';
+import StoryTable from './storytable/storyTable.js';
+import WorkloadWidget from './workloadwidget/workloadWidget.js';
+
+
+let SprintTable = React.createClass({
 
 
   changePresence: function (memberId, dayIndex) {
@@ -22,7 +29,7 @@ var SprintTable = React.createClass({
     return initState;
   },
   getInitialState: function () {
-    var initState = {members: [], stories: [], sprintDays: sprintDays, memberDays: {}, assigneeMap: {}};
+    var initState = {members: [], stories: [], sprintDays: this.props.sprintDays, memberDays: {}, assigneeMap: {}};
 
     return this.populateInitState(initState);
   },
@@ -242,3 +249,5 @@ var SprintTable = React.createClass({
     )
   }
 });
+
+export default SprintTable;

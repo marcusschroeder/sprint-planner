@@ -4,7 +4,7 @@ import React from 'react';
 import Router from 'react-router';
 import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 
-import LoginHandler from './components/Login.js';
+import OtherPageHandler from './components/OtherPage.js';
 import SprintPlannerHandler from './components/SprintPlaner.js';
 
 let App = React.createClass({
@@ -17,7 +17,7 @@ let App = React.createClass({
               <Link to="app">Home</Link>
             </li>
             <li>
-              <Link to="login">Login</Link>
+              <Link to="login">Totally different page</Link>
             </li>
             <li>
               <Link to="planner">SprintPlanner</Link>
@@ -35,7 +35,7 @@ let App = React.createClass({
 
 let routes = (
   <Route name="app" path="/" handler={App}>
-    <Route name="login" path="/login" handler={LoginHandler}/>
+    <Route name="login" path="/login" handler={OtherPageHandler}/>
       <Route name="planner" path="/planner" handler={SprintPlannerHandler}/>
   </Route>
 );

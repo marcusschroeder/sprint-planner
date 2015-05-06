@@ -1,4 +1,8 @@
-var WorkloadWidget = React.createClass({
+import React from 'react';
+
+import ConsumptionRow from './consumptionRow.js'
+
+let WorkloadWidget = React.createClass({
 
   propTypes: {
     members: React.PropTypes.array.isRequired,
@@ -55,3 +59,5 @@ var WorkloadWidget = React.createClass({
     );
   }
 })
+
+export default WorkloadWidget;
