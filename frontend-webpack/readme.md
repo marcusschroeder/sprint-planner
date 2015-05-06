@@ -15,7 +15,8 @@ The initial setup is currently inspired by this [blog-post](http://jmfurlott.com
 ## Run project with Webpack
 
  - to build the project run `npm run build`
- - to start dev server with hot reload, do `npm start`
+ - to start dev server with hot reload, do `npm start` and go http://localhost:8080/#/login
+
 
 
 ## Documentations
