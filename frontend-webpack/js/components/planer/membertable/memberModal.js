@@ -1,7 +1,8 @@
+import React from 'react';
 /*
  A small modal window to add a new programmer or edit an existing programmer quickly.
  */
-var MemberModal = React.createClass({
+let MemberModal = React.createClass({
 
   propTypes: {
     member: React.PropTypes.shape({
@@ -62,4 +63,6 @@ var MemberModal = React.createClass({
       </div>
     );
   }
-})
+});
+
+export default MemberModal;
