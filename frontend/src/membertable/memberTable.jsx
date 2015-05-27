@@ -14,6 +14,8 @@ var MemberTable = React.createClass({
 
   render: function() {
 
+    var self = this;
+    var totalDays = 0;
     var sprintDays = this.props.sprintDays.map(function(day){
       return (<th>{day}</th>)
     });
@@ -27,6 +29,7 @@ var MemberTable = React.createClass({
       }, this);
 
       var style = {backgroundColor: member.color};
+      totalDays += rowTotal;
 
       return (
         <tr>
@@ -43,17 +46,20 @@ var MemberTable = React.createClass({
     }, this);
 
     return(
-      <table>
-        <thead>
-          <tr>
-            <th className="firstColumn" ></th>
-              {sprintDays}
-          </tr>
-        </thead>
-        <tbody>
-            {memberList}
-        </tbody>
-      </table>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th className="firstColumn" ></th>
+                {sprintDays}
+            </tr>
+          </thead>
+          <tbody>
+              {memberList}
+          </tbody>
+        </table>
+        <div className="totalDays">Total: {totalDays}</div>
+      </div>
     )
   }
 })

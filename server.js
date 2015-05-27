@@ -1,15 +1,44 @@
-var express = require('express')
+var config = require("./config.json")
+var express = require('express');
+var fs = require('file-system');
+var bodyParser = require('body-parser');
+
 var app = express()
 
 app.use(express.static('public'));
+app.use(bodyParser.json()); // for parsing application/json
 
 
+app.post('/sprint/:id', function (req, res) {
+    console.log("POST " + req.originalUrl);
+    fs.writeFile(config.data + req.params.id + ".json", JSON.stringify(req.body), function (err) {
+      if (err) {
+        res.status(404).send("data not found");
+      };
+    });
+
+    res.status(204).send();
+});
+
+app.get('/sprint/:id', function (req, res) {
+    console.log("GET " + req.originalUrl);
+    fs.readFile(config.data + req.params.id + ".json", {encoding: "utf8"}, function (err, data) {
+        if (err) {
+          res.status(404).send("data not found");
+        } else {
+          var payload = JSON.parse(data)
+          res.status(200).send(payload)
+        }
+    });
+});
 
 var server = app.listen(3000, function () {
 
     var host = server.address().address
     var port = server.address().port
 
-    console.log('Example app listening at http://%s:%s', host, port)
+    fs.mkdir("data")
+    
+    console.log('App listening at http://%s:%s', host, port)
 
 })

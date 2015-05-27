@@ -14,6 +14,12 @@ module.exports = function (grunt) {
               files: [
                 'react.min.js'
               ]
+            },
+            'jquery': {
+              keepExpandedHierarchy: false,
+              files: [
+                'dist/jquery.min.js'
+              ],
             }
           }
         }

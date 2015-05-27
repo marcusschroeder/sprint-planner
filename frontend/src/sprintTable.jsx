@@ -1,6 +1,5 @@
 var SprintTable = React.createClass({
 
-
   changePresence: function (memberId, dayIndex) {
     var currentVal = this.state.memberDays[memberId][dayIndex];
 
@@ -27,8 +26,9 @@ var SprintTable = React.createClass({
     return this.populateInitState(initState);
   },
 
-  componentDidUpdate: function () {
-    this.saveStateToLocalStorage();
+  componentDidUpdate: function() {
+    //this.saveStateToLocalStorage();
+    this.saveData();
   },
 
   getStateFromLocalStorage: function () {
@@ -40,6 +40,60 @@ var SprintTable = React.createClass({
     console.log("Saving to localStorage: sprintPlanner", this.state);
     var newState = JSON.stringify(this.state);
     localStorage.setItem("sprintPlanner", newState);
+  },
+
+  createGuid: function(){
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+      return v.toString(16);
+    });
+  },
+
+  getGuidFromUrl: function(){
+    var key = "sprint";
+    var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
+    return result && unescape(result[1]) || "";
+  },
+
+  saveData: function() {
+
+    var guid = this.getGuidFromUrl();
+
+    if (guid == "") {
+      guid = this.createGuid();
+      window.history.pushState('', 'Sprint Planner: ' + guid, '/?sprint=' + guid);
+    }
+
+    var data = JSON.stringify(this.state);
+    console.log(data)
+    $.ajax({
+      type: "POST",
+      url: "/sprint/" + guid,
+      contentType: "application/json; charset=utf-8",
+      data: data,
+      success: function() {
+        console.log("saved")
+      },
+      dataType: "json"
+    });
+  },
+
+  loadData: function(callback) {
+
+    var guid = this.getGuidFromUrl();
+
+    if (guid != "") {
+      $.ajax({
+        type: "GET",
+        url: "/sprint/" + guid,
+        success: function(data) {
+          callback(data)
+        },
+        dataType: "json"
+      });
+    } else {
+
+    }
   },
 
   drag: function (member, event) {
@@ -201,7 +255,7 @@ var SprintTable = React.createClass({
   render: function () {
     return (
       <div>
-
+        <h1 id="sprintHeader">Sprint {this.state.sprintName}</h1>
         <h2>Programmer</h2>
         <MemberTable
           members={this.state.members}
