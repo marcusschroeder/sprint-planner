@@ -1,6 +1,9 @@
 import React from 'react';
 
+import MemberModal from './memberTable/memberModal.js';
 import MemberTable from './memberTable/memberTable.js';
+
+
 import StoryTable from './storytable/storyTable.js';
 import WorkloadWidget from './workloadwidget/workloadWidget.js';
 
@@ -220,7 +223,6 @@ let SprintTable = React.createClass({
           drag={this.drag}
         />
         <button onClick={this.openAddMemberDialog}>add programmer</button>
-
 
         <h2>Who is doing what&#63;</h2>
         <StoryTable

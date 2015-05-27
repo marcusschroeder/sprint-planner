@@ -16,9 +16,11 @@ let App = React.createClass({
             <li>
               <Link to="app">Home</Link>
             </li>
+
             <li>
               <Link to="login">Totally different page</Link>
             </li>
+
             <li>
               <Link to="planner">SprintPlanner</Link>
             </li>
