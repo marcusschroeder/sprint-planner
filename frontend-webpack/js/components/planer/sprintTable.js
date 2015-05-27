@@ -95,6 +95,8 @@ let SprintTable = React.createClass({
   },
 
   openAddMemberDialog: function (event) {
+    let modalContainer = document.getElementById('modal');
+    console.info(modalContainer);
     React.render(<MemberModal clientX={event.clientX} clientY={event.clientY} saveMember={this.addMember} />, document.getElementById('modal'))
   },
 
