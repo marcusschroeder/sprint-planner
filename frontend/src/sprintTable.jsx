@@ -1,3 +1,17 @@
+var ws = new WebSocket('ws://' + window.location.hostname + ':8001');
+
+ws.onopen = function () {
+  ws.send('Ping'); // Send the message 'Ping' to the server
+};
+
+ws.onerror = function (error) {
+  console.log('WebSocket Error ' + error);
+};
+
+ws.onmessage = function (e) {
+  console.log('Server: ' + e.data);
+};
+
 var SprintTable = React.createClass({
 
   changePresence: function (memberId, dayIndex) {
@@ -20,6 +34,12 @@ var SprintTable = React.createClass({
     this.loadData(function (data) {
       this.setState(data)
     }.bind(this));
+  },
+
+  shouldComponentUpdate: function(nextProps, nextState) {
+
+    console.log("here", nextProps, nextState);
+    return true;
   },
 
   componentDidUpdate: function() {
@@ -87,8 +107,6 @@ var SprintTable = React.createClass({
         },
         dataType: "json"
       });
-    } else {
-
     }
   },
 
@@ -251,6 +269,7 @@ var SprintTable = React.createClass({
   render: function () {
     return (
       <div>
+        <UsersOnline />
         <h1 id="sprintHeader">Sprint {this.state.sprintName}</h1>
         <h2>Programmer</h2>
         <MemberTable

@@ -2,7 +2,7 @@ var config = require("./config.json")
 var express = require('express');
 var fs = require('file-system');
 var bodyParser = require('body-parser');
-
+var ws = require("nodejs-websocket");
 var app = express()
 
 app.use(express.static('public'));
@@ -42,3 +42,15 @@ var server = app.listen(3000, function () {
     console.log('App listening at http://%s:%s', host, port)
 
 })
+
+// Scream server example: "hi" -> "HI!!!"
+var websocketServer = ws.createServer(function (conn) {
+  console.log("New connection")
+  conn.on("text", function (str) {
+    console.log("Received "+str)
+    conn.sendText(str.toUpperCase()+"!!!")
+  })
+  conn.on("close", function (code, reason) {
+    console.log("Connection closed")
+  })
+}).listen(8001)
